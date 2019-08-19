@@ -1,3 +1,4 @@
 #!/bin/bash
 
-echo "Hello, Jordan!"
+pip install -r dev-requirements.txt
+flake8 --version
