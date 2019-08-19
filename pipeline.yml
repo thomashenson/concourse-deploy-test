@@ -1,0 +1,26 @@
+---
+resources:
+  - name: aws-deploy
+    type: git
+    source:
+      uri: https://github.com/thomashenson/concourse-deploy-test
+      branch: master
+
+jobs:
+  - name: deploy-app
+    public: true
+    serial: true
+    plan:
+      - get: aws-deploy
+        trigger: true
+      - task: aws-tests
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source: {repository: python}
+          inputs:
+            - name: aws-deploy
+
+          run:
+            path: aws-deploy/scripts/aws-test.sh
