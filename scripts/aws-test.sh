@@ -1,4 +1,6 @@
 #!/bin/bash
 
-pip install -r ../dev-requirements.txt
+pwd
+ls
+pip install -r aws-deploy/dev-requirements.txt
 flake8 --version
