@@ -29,6 +29,7 @@ jobs:
     serial: true
     plan:
       - get: GIT-repository
+        passed: [deploy-app]
       - task: serverless-aws
         config:
           platform: linux
