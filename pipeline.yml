@@ -29,6 +29,7 @@ jobs:
     plan:
       - get: GIT-repository
         passed: [deploy-app]
+        trigger: true
       - task: serverless-aws
         config:
           platform: linux
