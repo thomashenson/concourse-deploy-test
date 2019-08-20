@@ -26,7 +26,6 @@ jobs:
 
   - name: serverless-deploy
     public: true
-    serial: true
     plan:
       - get: GIT-repository
         passed: [deploy-app]
