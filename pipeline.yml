@@ -4,7 +4,7 @@ resources:
     type: git
     source:
       uri: https://github.com/thomashenson/concourse-deploy-test
-      branch: master
+      branch: dev
 
 jobs:
   - name: deploy-app
@@ -20,6 +20,7 @@ jobs:
             type: docker-image
             source:
               repository: thomashenson/docker-concourse
+              tag: test
           inputs:
             - name: GIT-repository
 
@@ -38,6 +39,7 @@ jobs:
             type: docker-image
             source:
               repository: thomashenson/docker-concourse
+              tag: test
           inputs:
             - name: GIT-repository
 
