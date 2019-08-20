@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-echo "hello"
+# Should only trigger when requirements have changed.
+pip install -r GIT-repository/dev-requirements.txt
