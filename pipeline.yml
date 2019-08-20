@@ -1,11 +1,4 @@
 ---
-resource_types:
-  - name: Python-image
-    type: docker-image
-    source:
-      repository: thomashenson/docker-concourse
-      tag: latest
-
 resources:
   - name: GIT-repository
     type: git
@@ -21,6 +14,7 @@ jobs:
       - get: GIT-repository
         trigger: true
       - task: aws-tests
+        on_success: {task: serverless-aws}
         config:
           platform: linux
           image_resource:
@@ -36,6 +30,7 @@ jobs:
     serial: true
     plan:
       - get: GIT-repository
+        trigger: true
       - task: serverless-aws
         config:
           platform: linux
