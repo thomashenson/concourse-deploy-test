@@ -1,4 +1,4 @@
 import example
 
 def test_example():
-    assert example.exampleMethod() == 1
+    assert example.exampleMethod() == 0
