@@ -7,7 +7,7 @@ resources:
       branch: master
 
 jobs:
-  - name: deploy-app
+  - name: linting-and-tests
     public: true
     serial: true
     plan:
@@ -28,7 +28,7 @@ jobs:
     public: true
     plan:
       - get: GIT-repository
-        passed: [deploy-app]
+        passed: [linting-and-tests]
         trigger: true
       - task: serverless-aws
         config:
