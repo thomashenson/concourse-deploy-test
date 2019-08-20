@@ -18,7 +18,7 @@ jobs:
           platform: linux
           image_resource:
             type: docker-image
-            source: {repository: thomashenson/docker-concourse}
+            source: {repository: thomashenson/docker-concourse, tag: test}
           inputs:
             - name: GIT-repository
 
