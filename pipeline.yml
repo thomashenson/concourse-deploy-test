@@ -20,17 +20,16 @@ jobs:
     plan:
       - get: GIT-repository
         trigger: true
-      - get: Python-image
       - task: aws-tests
         config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source: {repository: thomashenson/docker-concourse}
-        inputs:
-          - name: GIT-repository
-        run:
-          path: GIT-repository/scripts/aws-test.sh
+          platform: linux
+          image_resource:
+            type: docker-image
+            source: {repository: thomashenson/docker-concourse, tag: test}
+          inputs:
+            - name: GIT-repository
+          run:
+            path: GIT-repository/scripts/aws-test.sh
 
   - name: serverless-deploy
     public: true
@@ -42,7 +41,7 @@ jobs:
           platform: linux
           image_resource:
             type: docker-image
-            source: {repository: thomashenson/docker-concourse}
+            source: {repository: thomashenson/docker-concourse, tag: test}
           inputs:
             - name: GIT-repository
           run:
