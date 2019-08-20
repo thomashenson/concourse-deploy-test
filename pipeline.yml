@@ -1,6 +1,6 @@
 ---
 resources:
-  - name: aws-deploy
+  - name: git-Repository
     type: git
     source:
       uri: https://github.com/thomashenson/concourse-deploy-test
@@ -11,7 +11,7 @@ jobs:
     public: true
     serial: true
     plan:
-      - get: aws-deploy
+      - get: git-repository
         trigger: true
       - task: aws-tests
         config:
@@ -20,7 +20,24 @@ jobs:
             type: docker-image
             source: {repository: thomashenson/docker-concourse}
           inputs:
-            - name: aws-deploy
+            - name: git-repository
 
           run:
-            path: aws-deploy/scripts/aws-test.sh
+            path: git-repository/scripts/aws-test.sh
+
+  - name: serverless-deploy
+    public: true
+    serial: true
+    plan:
+      - get: git-repository
+      - task: serverless-aws
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source: {repository: thomashenson/docker-concourse}
+          inputs:
+            - name: git-repository
+
+          run:
+            path: git-repository/scripts/serverless.sh
