@@ -9,6 +9,7 @@ resources:
 jobs:
   - name: installing-dependencies
     public: true
+    serial: true
     plan:
       - get: GIT-repository
         trigger: true
@@ -25,7 +26,6 @@ jobs:
 
   - name: linting-and-tests
     public: true
-    serial: true
     plan:
       - get: GIT-repository
         trigger: true
