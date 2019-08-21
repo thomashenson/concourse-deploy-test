@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Run Linter
+# Run flake8 linting
 flake8 GIT-repository/python/
 
-# Run Unit tests
+# Run unit tests
 pytest GIT-repository/python/
