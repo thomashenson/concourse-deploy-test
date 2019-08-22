@@ -22,7 +22,7 @@ jobs:
         trigger: true
       - put: Python-container
         params:
-          build: GIT-repository/docker
+          build: GIT-repository
       - task: run
         config:
           platform: linux
@@ -31,7 +31,7 @@ jobs:
             source:
               repository: thomashenson/docker-concourse
           run:
-            path: GIT-repository/docker/install-dependencies
+            path: GIT-repository/install-dependencies
             args: []
 
 #  - name: linting-and-tests
