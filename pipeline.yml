@@ -6,61 +6,68 @@ resources:
       uri: https://github.com/thomashenson/concourse-deploy-test
       branch: test_stage
 
+  - name: Python-container
+    type: docker-image
+    source:
+      email: thomasjameshenson@gmail.com
+      username: thomashenson
+      password: Volkswagen32
+      repository: thomashenson/docker-concourse
+
 jobs:
   - name: installing-dependencies
-    public: true
     serial: true
     plan:
       - get: GIT-repository
         trigger: true
-      - task: install-dependencies
+      - put: Python-container
+        params:
+          build: GIT-repository/docker
+      - task: run
         config:
           platform: linux
           image_resource:
             type: docker-image
             source:
               repository: thomashenson/docker-concourse
-              tag: test
-          inputs:
-            - name: GIT-repository
           run:
-            path: GIT-repository/scripts/install-dependencies.sh
+            path: GIT-repository/docker/install-dependencies
+            args: []
 
-  - name: linting-and-tests
-    public: true
-    plan:
-      - get: GIT-repository
-        trigger: true
-        passed: [installing-dependencies]
-      - task: aws-tests
-        config:
-          platform: linux
-          image_resource:
-            type: docker-image
-            source:
-              repository: thomashenson/docker-concourse
-              tag: test
-          inputs:
-            - name: GIT-repository
-          run:
-            path: GIT-repository/scripts/aws-test.sh
-
-  - name: serverless-deploy
-    public: true
-    plan:
-      - get: GIT-repository
-        passed: [linting-and-tests]
-        trigger: true
-      - task: serverless-aws
-        config:
-          platform: linux
-          image_resource:
-            type: docker-image
-            source:
-              repository: thomashenson/docker-concourse
-              tag: test
-          inputs:
-            - name: GIT-repository
-          run:
-            path: GIT-repository/scripts/serverless.sh
-            
+#  - name: linting-and-tests
+#    public: true
+#    plan:
+#      - get: GIT-repository
+#        trigger: true
+#        passed: [installing-dependencies]
+#      - task: aws-tests
+#        config:
+#          platform: linux
+#          image_resource:
+#            type: docker-image
+#            source:
+#              repository: thomashenson/docker-concourse
+#              tag: test
+#          inputs:
+#            - name: GIT-repository
+#          run:
+#            path: GIT-repository/scripts/aws-test.sh
+#
+#  - name: serverless-deploy
+#    public: true
+#    plan:
+#      - get: GIT-repository
+#        passed: [linting-and-tests]
+#        trigger: true
+#      - task: serverless-aws
+#        config:
+#          platform: linux
+#          image_resource:
+#            type: docker-image
+#            source:
+#              repository: thomashenson/docker-concourse
+#              tag: test
+#          inputs:
+#            - name: GIT-repository
+#          run:
+#            path: GIT-repository/scripts/serverless.sh
