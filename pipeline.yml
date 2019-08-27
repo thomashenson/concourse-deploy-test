@@ -39,9 +39,6 @@ jobs:
       - get: GIT-repository
         trigger: true
         passed: [installing-dependencies]
-      - get: Python-container
-        trigger: true
-        passed: [installing-dependencies]
       - task: aws-tests
         config:
           platform: linux
@@ -57,9 +54,7 @@ jobs:
   - name: serverless-deploy
     plan:
       - get: GIT-repository
-        passed: [linting-and-tests]
         trigger: true
-      - get: Python-container
         passed: [linting-and-tests]
       - task: serverless-aws
         config:
@@ -68,7 +63,6 @@ jobs:
             type: docker-image
             source:
               repository: ((docker-username))/docker-concourse
-              tag: test
           inputs:
             - name: GIT-repository
           run:
