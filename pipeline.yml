@@ -9,9 +9,8 @@ resources:
   - name: Python-container
     type: docker-image
     source:
-      email: thomasjameshenson@gmail.com
       username: ((docker-username))
-      password: Volkswagen32
+      password: ((docker-password))
       repository: ((docker-username))/docker-concourse
 
 jobs:
@@ -49,7 +48,7 @@ jobs:
           image_resource:
             type: docker-image
             source:
-              repository: thomashenson/docker-concourse
+              repository: ((docker-username))/docker-concourse
           inputs:
             - name: GIT-repository
           run:
@@ -61,13 +60,14 @@ jobs:
         passed: [linting-and-tests]
         trigger: true
       - get: Python-container
+        passed: [linting-and-tests]
       - task: serverless-aws
         config:
           platform: linux
           image_resource:
             type: docker-image
             source:
-              repository: thomashenson/docker-concourse
+              repository: ((docker-username))/docker-concourse
               tag: test
           inputs:
             - name: GIT-repository
