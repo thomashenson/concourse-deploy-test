@@ -66,4 +66,4 @@ jobs:
           inputs:
             - name: GIT-repository
           run:
-            path: GIT-repository/serverless.yml
+            path: GIT-repository/serverless.sh
