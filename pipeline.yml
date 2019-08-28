@@ -49,7 +49,7 @@ jobs:
           inputs:
             - name: GIT-repository
           run:
-            path: GIT-repository/docker/aws-test.sh
+            path: GIT-repository/aws-test.sh
 
   - name: serverless-deploy
     plan:
