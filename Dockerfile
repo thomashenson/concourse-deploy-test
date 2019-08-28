@@ -8,5 +8,5 @@ RUN apt-get update -y &&\
     curl -sL https://deb.nodesource.com/setup_10.x | bash &&\
     apt-get install nodejs -y &&\
     node -v &&\
-    npm -v
+    npm -v &&\
     npm install -g serverless
