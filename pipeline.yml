@@ -4,7 +4,7 @@ resources:
     type: git
     source:
       uri: https://github.com/thomashenson/concourse-deploy-test
-      branch: test_stage
+      branch: serverless
 
   - name: Python-container
     type: docker-image
