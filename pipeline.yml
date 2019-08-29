@@ -35,6 +35,7 @@ jobs:
       #       path: GIT-repository/docker/install-dependencies.sh
 
   - name: linting-and-tests
+    serial: true
     plan:
       - get: GIT-repository
         trigger: true
