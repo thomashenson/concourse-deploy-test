@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
-pwd
+echo sls version: `serverless --version`
+echo current dir: `pwd`
+echo dir listing: 
 ls
 cd GIT-repository
 ls
-serverless --version
-serverless package --package GIT-repository
-serverless deploy --verbose
+echo packaging serverless bundle...
+serverless package --package pkg
+find ./pkg
+serverless deploy --verbose; 
