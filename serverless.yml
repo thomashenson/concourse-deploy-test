@@ -20,4 +20,4 @@ functions:
     tags:
       app: results
     environment:
-      hello: world
+      hello: world!
