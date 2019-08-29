@@ -6,22 +6,22 @@ resources:
       uri: https://github.com/thomashenson/concourse-deploy-test
       branch: serverless
 
-  - name: Python-container
-    type: docker-image
-    source:
-      username: ((docker-username))
-      password: ((docker-password))
-      repository: ((docker-username))/docker-concourse
+  # - name: Python-container
+  #   type: docker-image
+  #   source:
+  #     username: ((docker-username))
+  #     password: ((docker-password))
+  #     repository: ((docker-username))/docker-concourse
 
 jobs:
-  - name: installing-dependencies
-    serial: true
-    plan:
-      - get: GIT-repository
-        trigger: true
-      - put: Python-container
-        params:
-          build: GIT-repository
+#   - name: installing-dependencies
+#     serial: true
+#     plan:
+#       - get: GIT-repository
+#         trigger: true
+#       - put: Python-container
+#         params:
+#           build: GIT-repository
       # - task: run
       #   config:
       #     platform: linux
@@ -38,7 +38,7 @@ jobs:
     plan:
       - get: GIT-repository
         trigger: true
-        passed: [installing-dependencies]
+        # passed: [installing-dependencies]
       - task: aws-tests
         config:
           platform: linux
