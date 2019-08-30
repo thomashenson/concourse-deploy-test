@@ -24,17 +24,17 @@ jobs:
               - name: GIT-repository
             run:
               path: GIT-repository/aws-test.sh
-          - task: flake8
-            config:
-              platform: linux
-              image_resource:
-                type: docker-image
-                source:
-                  repository: ((docker-username))/docker-concourse
-              inputs:
-                - name: GIT-repository
-              run:
-                path: GIT-repository/flake8.sh
+        - task: flake8
+          config:
+            platform: linux
+            image_resource:
+              type: docker-image
+              source:
+                repository: ((docker-username))/docker-concourse
+            inputs:
+              - name: GIT-repository
+            run:
+              path: GIT-repository/flake8.sh
 
   - name: serverless-deploy
     plan:
