@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 
-#echo sls version: `serverless --version`
-#echo current dir: `pwd`
-#echo dir listing: 
-#ls
+# Changing into the directory where the serverless.yml file is located
 cd GIT-repository
-#ls
-#echo packaging serverless bundle...
-#serverless package --package pkg
-#find ./pkg
+
 serverless deploy --verbose; 
